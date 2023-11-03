@@ -2,7 +2,7 @@
 id: 14
 title: 'About Me'
 date: '2020-09-10T13:11:19+00:00'
-author: admin
+author: Lukas Lichtl
 layout: page
 guid: 'https://embed-me.com/?page_id=14'
 wp_featherlight_disable:

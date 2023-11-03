@@ -2,9 +2,9 @@
 id: 533
 title: 'EBAZ4205 - A cheap network-based JTAG debugger'
 date: '2021-06-12T06:43:48+00:00'
-author: admin
+author: Lukas Lichtl
 layout: post
-guid: 'https://embed-me.com/?p=533'
+guid: 'https://embed-me.github.io/?p=533'
 permalink: /ebaz4205-a-cheap-network-jtag-debugger-using-xvc/
 wp_featherlight_disable:
     - ''

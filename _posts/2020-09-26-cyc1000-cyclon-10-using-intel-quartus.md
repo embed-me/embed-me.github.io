@@ -2,9 +2,9 @@
 id: 144
 title: 'CYC1000 (Cyclon 10) Using Intel Quartus'
 date: '2020-09-26T16:58:01+00:00'
-author: admin
+author: Lukas Lichtl
 layout: post
-guid: 'https://embed-me.com/?p=144'
+guid: 'https://embed-me.github.io/?p=144'
 permalink: /cyc1000-cyclon-10-using-intel-quartus/
 wp_featherlight_disable:
     - ''

@@ -2,9 +2,9 @@
 id: 515
 title: 'QEMU - How to emulate your Zynq-7000 - Part 2'
 date: '2021-05-27T17:52:10+00:00'
-author: admin
+author: Lukas Lichtl
 layout: post
-guid: 'https://embed-me.com/?p=515'
+guid: 'https://embed-me.github.io/?p=515'
 permalink: /qemu-how-to-emulate-your-zynq-7000-part-2/
 wp_featherlight_disable:
     - ''

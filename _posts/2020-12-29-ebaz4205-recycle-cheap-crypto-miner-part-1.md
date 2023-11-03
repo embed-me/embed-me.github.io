@@ -2,9 +2,9 @@
 id: 350
 title: 'EBAZ4205 - "Recycle" a cheap crypto-miner (Part 1)'
 date: '2020-12-29T18:48:33+00:00'
-author: admin
+author: Lukas Lichtl
 layout: post
-guid: 'https://embed-me.com/?p=350'
+guid: 'https://embed-me.github.io/?p=350'
 permalink: /ebaz4205-recycle-cheap-crypto-miner-part-1/
 wp_featherlight_disable:
     - ''
