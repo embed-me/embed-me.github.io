@@ -1,13 +1,6 @@
 ---
-id: 581
 title: 'A brief overview of the Emacs VUnit-Mode'
-date: '2022-01-05T14:59:42+00:00'
-author: Lukas Lichtl
-layout: post
-guid: 'https://embed-me.github.io/?p=581'
 permalink: /vunit-mode-emacs-vunit/
-wp_featherlight_disable:
-    - ''
 categories:
     - 'FPGA Development'
 tags:

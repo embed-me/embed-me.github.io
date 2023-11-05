@@ -1,13 +1,6 @@
 ---
-id: 448
 title: 'EBAZ4205 - Again, but this time with Buildroot'
-date: '2021-02-18T06:15:28+00:00'
-author: Lukas Lichtl
-layout: post
-guid: 'https://embed-me.github.io/?p=448'
 permalink: /ebaz4205-with-buildroot/
-wp_featherlight_disable:
-    - ''
 categories:
     - Uncategorized
 ---

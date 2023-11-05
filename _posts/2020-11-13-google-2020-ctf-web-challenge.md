@@ -1,13 +1,6 @@
 ---
-id: 296
 title: 'Google 2020 CTF - Web Challenge'
-date: '2020-11-13T11:18:48+00:00'
-author: Lukas Lichtl
-layout: post
-guid: 'https://embed-me.github.io/?p=296'
 permalink: /google-2020-ctf-web-challenge/
-wp_featherlight_disable:
-    - ''
 categories:
     - CTF
 tags:
@@ -92,7 +85,7 @@ class Database {
   }
   add_note(note_id, content) {
     const note = {
-      note_id: note_id,
+      note_note_id,
       owner: 'guest',
       content: content,
       public: 1,
@@ -177,7 +170,7 @@ app.get('/:id([a-f0-9\-]{36})', recaptcha.middleware.render, utils.cache_mw, asy
 
   res.render('note_public', {
     content: safe_content,
-    id: note_id,
+    note_id,
     captcha: res.recaptcha
   });
 });

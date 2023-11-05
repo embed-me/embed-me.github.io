@@ -1,13 +1,7 @@
 ---
-id: 323
 title: 'Writeup – Hack The Box Buff'
 date: '2020-11-26T13:02:00+00:00'
-author: Lukas Lichtl
-layout: post
-guid: 'https://embed-me.github.io/?p=323'
 permalink: /writeup-hack-the-box-buff/
-wp_featherlight_disable:
-    - ''
 categories:
     - 'Hack the Box'
     - 'Penetration Testing'

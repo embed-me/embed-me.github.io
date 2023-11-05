@@ -1,13 +1,7 @@
 ---
-id: 265
 title: 'Google 2020 CTF - Hardware Challenge'
 date: '2020-11-06T19:12:13+00:00'
-author: Lukas Lichtl
-layout: post
-guid: 'https://embed-me.github.io/?p=265'
 permalink: /google-2020-ctf-hardware-challenge/
-wp_featherlight_disable:
-    - ''
 categories:
     - CTF
     - 'Reverse Engineering'

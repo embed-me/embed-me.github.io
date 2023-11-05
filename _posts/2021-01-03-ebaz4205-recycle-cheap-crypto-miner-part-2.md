@@ -1,13 +1,6 @@
 ---
-id: 367
 title: 'EBAZ4205 – “Recycle” a cheap crypto-miner (Part 2)'
-date: '2021-01-03T16:24:05+00:00'
-author: Lukas Lichtl
-layout: post
-guid: 'https://embed-me.github.io/?p=367'
 permalink: /ebaz4205-recycle-cheap-crypto-miner-part-2/
-wp_featherlight_disable:
-    - ''
 categories:
     - 'FPGA Development'
     - SoC

@@ -1,13 +1,6 @@
 ---
-id: 465
 title: 'From HDL to Linux Userland'
-date: '2021-03-07T20:17:52+00:00'
-author: Lukas Lichtl
-layout: post
-guid: 'https://embed-me.github.io/?p=465'
 permalink: /from-hdl-to-linux-userland/
-wp_featherlight_disable:
-    - ''
 categories:
     - Uncategorized
 ---

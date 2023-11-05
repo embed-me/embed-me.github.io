@@ -1,13 +1,6 @@
 ---
-id: 492
 title: 'QEMU - How to emulate your Zynq-7000'
-date: '2021-05-23T17:44:38+00:00'
-author: Lukas Lichtl
-layout: post
-guid: 'https://embed-me.github.io/?p=492'
 permalink: /qemu-how-to-emulate-your-zynq-7000/
-wp_featherlight_disable:
-    - ''
 categories:
     - 'FPGA Development'
     - QEMU
