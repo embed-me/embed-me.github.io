@@ -1,12 +1,14 @@
-title: embed-me
+title: "embed-me"
+navicon: "/assets/favicon-32x32.png"
 description: >-
   FPGA, Embedded Linux, Reverse Engineering, Hacking,...
 baseurl: ""
 url: ""
 
-github_username: embed-me
-twitter_username: Luki14
-linkedin_username: lukaslichtl
+usernames:
+  github: embed-me
+  twitter: Luki14
+  linkedin: lukaslichtl
   
 markdown: kramdown
 remote_theme: chesterhow/tale

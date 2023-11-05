@@ -21,11 +21,11 @@ A couple of weeks ago I read an interesting post on Reddit ([here](https://www.r
 
 No matter where you order, usually have two options, the board as is (with boot device NAND Flash) or with modifications so that the boot mode is set to SD-Card. I ordered the version with SD-Card, UART- and JTAG-Header already mounted. The condition of the board was quite nice, with only some small scratches on the bottom. After I cleaned the soldering pads, the PCB was almost perfect.
 
-![_config.yml]({{ site.baseurl }}/images/ebaz4205_part1/ebaz4205_bot_2.png)
+![](/assets/posts/ebaz4205_part1/ebaz4205_bot_2.png)
 
 Some of the main components on the board, including headers, are highlighted below. The best resource for the schematic is probably [here](https://github.com/xjtuecho/EBAZ4205). However, be aware, that the schematic does not reflect the state of the board to 100% when ordered with “SD-Card mounted”, since the boot mode pins were altered!
 
-![_config.yml]({{ site.baseurl }}/images/ebaz4205_part1/nbaz4205_top_components.png)
+![](/assets/posts/ebaz4205_part1/nbaz4205_top_components.png)
 
 **Explanation:**
 
@@ -42,17 +42,17 @@ Some of the main components on the board, including headers, are highlighted bel
 
 With the version of the PCB that I received, it was not possible to power the board with J4 (power connector at the bottom right in the image above). The reason for this is, that D24 is marked on the schematic as NC (not connected), and indeed, the diode is missing on the PCB. Therefore I had to use Pin 1/3 on any of the connectors DATA1-3. The board requires 12V on these pins and uses about 60mA if no SD-Card is inserted (in case you want to make sure it does not light up when connected for the first time). A simple USB to UART module connected to the pins on J7 (see above) will provide us a debugging interface.
 
-![_config.yml]({{ site.baseurl }}/images/ebaz4205_part1/ebaz4205_connected.png)
+![](/assets/posts/ebaz4205_part1/ebaz4205_connected.png)
 
 ## The Software
 
 I used the following [Buildroot image](https://drive.google.com/file/d/16wQKpiYsH0gQ7KmnnYMrmFdCxwkF3WS4/view?usp=sharing), which was already verified to work in order to boot the board for the first time. I also created a [mirror](https://mega.nz/file/sN4kgQCS#7P3qanUhiiZYH8z0iqO4ExUfTPlSWlgE7A2JuavI8C4) in case the link does not work any longer (MD5 of the image: e5349351fc30bfcf91e4fa5b8e3b3cbe). If you are on Windows, Win32 Disk Imager can be used to write the image to an SD-Card. On Linux, using dd is probably the simplest method.
 
-![_config.yml]({{ site.baseurl }}/images/ebaz4205_part1/win32_disk_imager.png)
+![](/assets/posts/ebaz4205_part1/win32_disk_imager.png)
 
 Once the system is up and running you are greeted with a serial terminal. For this image the login is *root/root*.
 
-![_config.yml]({{ site.baseurl }}/images/ebaz4205_part1/ebaz4205_login_preb.png)
+![](/assets/posts/ebaz4205_part1/ebaz4205_login_preb.png)
 
 At this point, we have come quite far with minimal work. We already know that the Power Supply, Zynq, DDR, and hardware modifications for SD-Boot are fine! I decided that the PHY/Ethernet is probably something that also needs to be checked at this point. Therefore, I modified the existing network configuration in */etc/network/interface*s to make use of DHCP:
 
@@ -63,7 +63,7 @@ iface eth0 inet dhcp
 
 Finally, I made sure that the Port on my local gateway supports 100MBit (correlates with the PHYs capabilities) and also that DHCP is enabled. The figure below shows the end of the boot process when *[udhcpc ](https://udhcp.busybox.net/README.udhcpc)*gets an IP address assigned and we are able to send some greetings to google.
 
-![_config.yml]({{ site.baseurl }}/images/ebaz4205_part1/ebaz4205_phy_preb.png)
+![](/assets/posts/ebaz4205_part1/ebaz4205_phy_preb.png)
 
 I know, there is still some part missing in our verification – the NAND Flash, however, since there was no device in */sys/class/mtd/*, I assume that the flash was not part of the device-tree and/or the driver is not compiled into the kernel. TBH, I don’t really care about this right now and will deal with it at a later point.
 

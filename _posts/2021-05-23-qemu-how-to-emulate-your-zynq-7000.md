@@ -17,7 +17,7 @@ tags:
 
 As you are probably aware, [QEMU ](https://www.qemu.org/)is a quite fast machine emulator and virtualizer. This means that it allows us to emulate hardware with it, and the nice thing is that Xilinx supports it for most of their devices, including the MicroBlaze softcore. Although QEMU supports user-mode emulation (running applications compiled for a different architecture), we will focus on the system-mode for now in order to boot up a Linux system without the actual hardware. Since a lot of work on this blog is already based on the EBAZ4205 board and there are posts available on how to build and tailor a Linux Distro for it, I will use the artifacts of these builds within this blog post. If you want to generate Boot Files for EBAZ4205, instructions are available on the blog posts regarding EBAZ4205 in [Part 2](https://embed-me.github.io/ebaz4205-recycle-cheap-crypto-miner-part-2/) and [Part 3](https://embed-me.github.io/ebaz4205-recycle-cheap-crypto-miner-part-3/) of the series. So let’s get right to it.
 
-![_config.yml]({{ site.baseurl }}/images/zynq_quemu_part1/image.png)
+![](/assets/posts/zynq_quemu_part1/image.png)
 
 ## The Prerequisites
 

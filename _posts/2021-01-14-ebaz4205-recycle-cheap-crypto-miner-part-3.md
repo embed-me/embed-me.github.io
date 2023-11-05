@@ -36,7 +36,7 @@ wget http://downloads.yoctoproject.org/releases/yocto/yocto-3.0.4/buildtools/x86
 ./x86_64-buildtools-nativesdk-standalone-3.0.4.sh
 ```
 
-<div aria-hidden="true" class="wp-block-spacer" style="height:12px"></div>![_config.yml]({{ site.baseurl }}/images/ebaz4205_part3/ebaz4205_install_esdk.png)
+<div aria-hidden="true" class="wp-block-spacer" style="height:12px"></div>![](/assets/posts/ebaz4205_part3/ebaz4205_install_esdk.png)
 
 Next, we need to clone the poky repository from the Yocto Project.
 
@@ -54,7 +54,7 @@ git clone -b rel-v2020.1 --depth=1 https://github.com/Xilinx/meta-xilinx-tools.g
 git clone -b zeus --depth=1 https://github.com/embed-me/meta-ebaz4205.git
 ```
 
-<div aria-hidden="true" class="wp-block-spacer" style="height:12px"></div>![_config.yml]({{ site.baseurl }}/images/ebaz4205_part3/ebaz4205_poky_dir.png)
+<div aria-hidden="true" class="wp-block-spacer" style="height:12px"></div>![](/assets/posts/ebaz4205_part3/ebaz4205_poky_dir.png)
 
 In order to allow easy setup, I have created a [template configuration](https://www.yoctoproject.org/docs/3.0.3/mega-manual/mega-manual.html#creating-a-custom-template-configuration-directory) file. To ensure it’s usage, we have to copy it to the poky root.
 
@@ -100,7 +100,7 @@ screen /dev/ttyUSB0 115200 1n8
 
 Now power the board up and you should see it boot right away.
 
-![_config.yml]({{ site.baseurl }}/images/ebaz4205_part3/ebaz4205_linux_login.png)
+![](/assets/posts/ebaz4205_part3/ebaz4205_linux_login.png)
 
 The default login on the command prompt is *root/root*. For detailed information please have a look at the [embed-me/meta-ebaz4205](https://github.com/embed-me/meta-ebaz4205) Github repo’s README file.
 

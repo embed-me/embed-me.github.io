@@ -14,7 +14,7 @@ tags:
 
 ## Intro
 
-![_config.yml]({{ site.baseurl }}/images/google_2020_ctf_hardware/google_ctf_banner.png)
+![](/assets/posts/google_2020_ctf_hardware/google_ctf_banner.png)
 
 When I heard that this years google CTF also contains a hardware challenge involving SystemVerilog I was quite stoked. As an Embedded Systems Engineer focused on FPGAs, it was clear instantly – I have to give it a try. For those of you who do not know SystemVerilog, it is a hardware description language used to design and implement electronic circuits within a chip (although it can also be used for simulation and verification).
 
@@ -24,7 +24,7 @@ Let’s have a look at the google domain hosting the [CTF](https://capturethefla
 
 The basic hardware challenge is what we are looking for. First download the attachment and see what we have got.
 
-![_config.yml]({{ site.baseurl }}/images/google_2020_ctf_hardware/google_ctf_overview.png)
+![](/assets/posts/google_2020_ctf_hardware/google_ctf_overview.png)
 
 The first file contains simple C++ Code which looks as follows.
 
@@ -108,7 +108,7 @@ Once again, looking through the code step by step, we can see that:
 
 In order to get the safe to open, everything that is required is to do the process in reverse. For a more graphical representation of how the 56 bits are swapped, have a look at the following graph.
 
-![_config.yml]({{ site.baseurl }}/images/google_2020_ctf_hardware/system_verilog_safe.png)
+![](/assets/posts/google_2020_ctf_hardware/system_verilog_safe.png)
 
 For example, the first char (7bit value) that is provided will be placed at index 0 of the register named *memory*. Wires than rout these bits to *magic\[55:49\]* and from there to *kittens*\[6:0\] where the final comparison occurs. In order to perform the bit swapping, I decided to write a python script.
 
@@ -220,11 +220,11 @@ end architecture arch;
 
 The following code instantiates the module *check* (Design Under Test or DUT) and provides the password character per character on the rising edge. When done, the simulation is stopped by assertion.
 
-![_config.yml]({{ site.baseurl }}/images/google_2020_ctf_hardware/modelsim6.png)
+![](/assets/posts/google_2020_ctf_hardware/modelsim6.png)
 
 As can be seen above, the curser marks the point in time where the first sample is taken from the *data* input (0x37 = ‘7’) and is stored in the memory’s register offset 0. To fill the whole memory, this process repeats 8 times in total. Note that red signals (or ‘X’) indicate uninitialized states.
 
-![_config.yml]({{ site.baseurl }}/images/google_2020_ctf_hardware/modelsim4.png)
+![](/assets/posts/google_2020_ctf_hardware/modelsim4.png)
 
 In the end, the *open\_safe* signal turns high, which indicates that the combination of characters is correct and our thesis about the functionality of the design, as well as the password generation process is correct. Yay! A closer look at the *kittens* variable at the very bottom shows the hexadecimal value *0x0aafef4be2dbcc* which is decimal for *3008192072309708*.
 

@@ -29,12 +29,12 @@ Cyclone 10 25kLP FPGA
 - PMOD headers
 - ARROW USB Blaster
 
-![_config.yml]({{ site.baseurl }}/images/cyclon10/cyc1000.png)
+![](/assets/posts/cyclon10/cyc1000.png)
 
 
 This is how it arrived at my doorstep.
 
-![_config.yml]({{ site.baseurl }}/images/cyclon10/NDP_1949.png)
+![](/assets/posts/cyclon10/NDP_1949.png)
 
 ## The Software
 
@@ -42,9 +42,9 @@ As a first step, download the Intel [Quartus Prime Lite Design Software](https:/
 
 After the initial setup, let’s start Quartus Prime, open up the “New Project Wizard” and select the correct Cyclone 10 LP (10CL025YU256C8G). Before hitting “Finish”, select “ModelSim-Altera simulator” and your preferred Language.
 
-![_config.yml]({{ site.baseurl }}/images/cyclon10/quartus_cyclon10LP.png)
+![](/assets/posts/cyclon10/quartus_cyclon10LP.png)
 
-![_config.yml]({{ site.baseurl }}/images/cyclon10/quartus_modelsim-altera.png)
+![](/assets/posts/cyclon10/quartus_modelsim-altera.png)
 
 Although Quartus provides a tool for pin assignment (“Assignment Editor” and “Pin Planner”), I don’t really like the idea to do this within the GUI. First it is slow and second, it is a lot more productive if the assignments are grouped and have proper comments assigned, so that they can be easily reused in another project. Therefore I wrote a TCL script that contains all the pin assignments for the board. In order to make use of them to the current project, first add the TCL file to the project, then select “Tools” → “TCL Scripts” and run the script. Alternatively use the Quartus Prime Tcl Console and execute:
 
@@ -67,13 +67,13 @@ In order to finalize the constraints part of this project, it is a good idea to 
 
 Since the CYC1000 contains an FT2232H which can be used for FPGA configuration using the Arrow-USB-Blaster as well as UART transmission, I thought this would be a nice way to verify both work as expected including the driver. Let’s start right away using “Tools” → “Platform Designer” in order to add an UART RS232 IP in streaming mode (no memory mapping required) with the default settings of 115200 Baud, 1n8.
 
-![_config.yml]({{ site.baseurl }}/images/cyclon10/platform_designer_clock-1.png)
+![](/assets/posts/cyclon10/platform_designer_clock-1.png)
 
-![_config.yml]({{ site.baseurl }}/images/cyclon10/platform_designer_uart.png)
+![](/assets/posts/cyclon10/platform_designer_uart.png)
 
 Continue by selecting “clk\_0” with a clock frequency of 12MHz (on-board oscillator) and connected “clk” and “reset”. Finally loopback RX and TX on the streaming side and export the “external\_interface” using the “ext”-prefix as shown below.
 
-![_config.yml]({{ site.baseurl }}/images/cyclon10/platform_designer_connect.png)
+![](/assets/posts/cyclon10/platform_designer_connect.png)
 
 As a last step, save the System und generate the output product using “Generate” → “Generate HDL”. In order to add the system to the VHDL top-level design, the easiest method is to copy the Instantiation Template (“Generate” → “Instantiation Template”).
 
@@ -168,9 +168,9 @@ crw-rw-r-- 1 root dialout 188, 1 Sep 25 08:41 /dev/ttyUSB1
 
 In order to test the Bitstream’s functionality we have to configure the FPGA. In Quartus Designer, this can be done using the internal programmer (“Tools” → “Programmer”). The PCB also contains a Serial Configuration Flash Memory (QPCQ-A) which allows the FPGA to restore it’s configuration after a power-loss. However, this requires a *Programmer Object File* (.pof). For now, let’s simply configure the FPGA using the generated *SRAM Object File* (.sof) file.
 
-![_config.yml]({{ site.baseurl }}/images/cyclon10/quartus_program_device_arrowblaster.png)
+![](/assets/posts/cyclon10/quartus_program_device_arrowblaster.png)
 
-![_config.yml]({{ site.baseurl }}/images/cyclon10/quartus_program_device.png)
+![](/assets/posts/cyclon10/quartus_program_device.png)
 
 Connect to the UART Port using [screen](https://linux.die.net/man/1/screen)or [minicom](https://linux.die.net/man/1/minicom) :
 
@@ -180,6 +180,6 @@ user@ubuntu:~$ sudo screen /dev/ttyUSB1 115200 1n8
 
 Finally verify that whatever is typed in the serial terminal is looped back to you so that you can see it. This basically verifies that the FTDI performs USB to UART conversion, redirects the transmitted characters to the FPGA which then loops them back to you so you can see them.
 
-![_config.yml]({{ site.baseurl }}/images/cyclon10/uart_loopback.png)
+![](/assets/posts/cyclon10/uart_loopback.png)
 
 This verifies that both the ARROW-Programmer and the USB to UART port is working as expected. Nice!

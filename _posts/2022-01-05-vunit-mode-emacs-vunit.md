@@ -20,13 +20,13 @@ Anybody who is working in HDL Design should know what [VUnit ](https://vunit.git
 
 The mode acts as a global minor-mode and binds/hooks to the VHDL-mode. Once the mode is loaded, the default keybinding “`C-x x`” invokes the main menu, which looks as follows.
 
-![_config.yml]({{ site.baseurl }}/images/emacs_vunit_mode/vunit_mode_menu.png)
+![](/assets/posts/emacs_vunit_mode/vunit_mode_menu.png)
 
 The available options are pretty much self-explanatory, however, the colors have some special meaning that requires additional explanation. The ones marked in blue will *execute* the specified action *and then quit* the vunit-mode command window. The ones marked in red, however, will *add additional flags* for the actions available in blue. For example, in order to simulate the test case at the current cursor position in the GUI (eg. Modelsim) first enable the GUI flag by pressing `g` (the Minibuffer will display the currently enabled flags) and then start the simulation by pressing `t`.
 
 Here is a quick demo from the [official vunit-mode Github repository](https://github.com/embed-me/vunit-mode) that shows some use-cases.
 
-![_config.yml]({{ site.baseurl }}/images/emacs_vunit_mode/animation.gif)
+![](/assets/posts/emacs_vunit_mode/animation.gif)
 
 Note that, if you run a command for the first time and you have not configured the path to the VUnit directory, you will be prompted for it. It is also possible to change the path at any point in time using the `vunit-get-path` function.
 
@@ -40,7 +40,7 @@ Since the package is part of [MELPA](https://melpa.org/#/), the installation is 
 
 In order to customize the mode, simply run `M-x customize`, search for vunit and the following configuration should appear.
 
-![_config.yml]({{ site.baseurl }}/images/emacs_vunit_mode/vunit_mode_customize.png)
+![](/assets/posts/emacs_vunit_mode/vunit_mode_customize.png)
 
 In order for the VUnit-Mode to work, install VUnit according to the [official documentation](https://vunit.github.io/installing.html) and ensure that your preferred simulator is in the path.
 

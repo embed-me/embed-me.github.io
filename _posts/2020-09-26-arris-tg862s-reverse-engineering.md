@@ -28,12 +28,12 @@ Furthermore, unfortunately ARRIS does not seem to provide a firmware download or
 
 Seems like we have to open the device up. This is what the PCB looks like.
 
-![_config.yml]({{ site.baseurl }}/images/tg862/NDP_1940.png)
-![_config.yml]({{ site.baseurl }}/images/tg862/NDP_1939_small.png)
+![](/assets/posts/tg862/NDP_1940.png)
+![](/assets/posts/tg862/NDP_1939_small.png)
 
 In order to get a rough overview, I tried to identify the main components/modules on the board.
 
-![_config.yml]({{ site.baseurl }}/images/tg862/NDP_1940_smal_detailsl.png)
+![](/assets/posts/tg862/NDP_1940_smal_detailsl.png)
 
 The PCBs copyright is 2012 and it seems to be revision T (whatever that means). Seems like the Board Version is 1.2. The CPU used is labeled DNCE2510GU from Intel, which seems to be a rebranded TI TNETC4800 (belonging to the Puma5 family) targeting cable modems. Thanks to mrquincle who has figured this out. Since I didn’t want to brick the device I kept all the shieldings in place and took a quick look at some of the other components. Let’s see:
 
@@ -52,15 +52,15 @@ In order to figure out what caused the crash, USART access could give great insi
 foo@bar:~$ screen /dev/ttyUSB0 115200 1n8
 ```
 
-![_config.yml]({{ site.baseurl }}/images/tg862/uart_jtag_pcb_small.png)
+![](/assets/posts/tg862/uart_jtag_pcb_small.png)
 
 The first view lines on the terminal once connected were quite interesting and revealed some useful insight. The secondary bootloader is [Das U-Boot](https://u-boot.readthedocs.io/en/latest/), a very popular bootloader for embedded systems that I regularly use at work.
 
-![_config.yml]({{ site.baseurl }}/images/tg862/uart_boot.PNG)
+![](/assets/posts/tg862/uart_boot.PNG)
 
 A couple of seconds after booted successfully, all of a sudden the system gets reset and from there on is stuck in a loop until a complete power cycle occurs. No information about what went wrong in the console, so that’s quite disappointing. However, because the reset happened out of nowhere, I suspected that it might be a watchdog timer that got triggered. Maybe because the arris application got stuck?
 
-![_config.yml]({{ site.baseurl }}/images/tg862/uart_boot_reset.PNG)
+![](/assets/posts/tg862/uart_boot_reset.PNG)
 
 
 ## How about JTAG
@@ -71,23 +71,23 @@ Next, I tried to find the JTAG port of the DNCE2510GU in order to get some more 
 
 In order to get a better understanding of the system, let’s try to dump the content of the two flash chips. We have already identified that these are Micronix MX25L12835F, so let’s evaluate if your favorite tool flashrom can handle them. A quick look at the supported hardware section reveals that indeed it is. While using the Micronix datasheet to identify the pins, connect a SOP16 Pin Adapter to the chip on top and bottom. Finally, start to dump the EEPROM content.
 
-![_config.yml]({{ site.baseurl }}/images/tg862/spi_flashdump.PNG)
+![](/assets/posts/tg862/spi_flashdump.PNG)
 
 Using binwalk in combination with the --extract parameter it is trivial to extract the rootfs from the EEPROM dump. Alternatively, it is always possible to use dd once the offset and size of the Squashfs are known.
 
-![_config.yml]({{ site.baseurl }}/images/tg862/flashdump_top_binwalk.PNG)
+![](/assets/posts/tg862/flashdump_top_binwalk.PNG)
 
 After extraction, we have a full root filesystem at hand we can use to poke around. From here on depending on what we want to do, the opportunities are basically endless (eg. disassemble system binaries, find version information about services and check them for CVE‘s,…). However, for now stick to what is important, try to find the root cause of the reset and try to fix it.
 
-![_config.yml]({{ site.baseurl }}/images/tg862/rootfilesystem.PNG)
+![](/assets/posts/tg862/rootfilesystem.PNG)
 
 Armed with more knowledge of the system, let’s get a rough overview of how the system is initialized.
 
-![_config.yml]({{ site.baseurl }}/images/tg862/mini_cli.png)
+![](/assets/posts/tg862/mini_cli.png)
 
 Now that we have a rough overview of the boot process, let’s continue. First of all, let’s try to interrupt the boot-process in U-Boot. Unfortunately, this does not work, however, since the developers did not disable the serial port and boot-time is of the essence, I suspect that the bootdelay uboot environmental variable is set to zero. In order to still end up in the U-Boot console, I tried what happens if the CRC-Check of the kernel image fails. To achieve this I simply read from the external flash using a Bus Pirate device while the bootloader tried to read as well. This of cause resulted in a collision and the calculation of the CRC failed. A couple of seconds later I had access to the U-Boot console.
 
-![_config.yml]({{ site.baseurl }}/images/tg862/uart_force_uboot.PNG)
+![](/assets/posts/tg862/uart_force_uboot.PNG)
 
 
 Now, that we have full access to U-Boot we can do whatever we want, even tftpboot our own image. What is interesting is, that the reset behavior does not happen at this level. Maybe the root cause is really a watchdog activated at a later stage in the boot process? Let’s find out if we can get a shell. We already know that a normal boot process during a handoff in the kernel loads the busybox init process which in term runs rcS. In order to get what we want, we can simply pass init=/bin/bash to the kernel using the bootargs environmental variable.
@@ -107,12 +107,12 @@ bootm ${LOADADDR}
 
 …and a couple of seconds later we find ourselves in a shell.
 
-![_config.yml]({{ site.baseurl }}/images/tg862/uart_bash.PNG)
+![](/assets/posts/tg862/uart_bash.PNG)
 
 This is where things got complicated. Since the init process was not run, the system is not fully initialized. This means that our functionality is quite limited. You might picture the the bootup process as follows (dotted rectangles not run).
 
 
-![_config.yml]({{ site.baseurl }}/images/tg862/uboot_bash.png)
+![](/assets/posts/tg862/uboot_bash.png)
 
 
 Even though the init script from ARRIS was not loaded, the box kept resetting after about 40 seconds. According to some log files and scripts that I discovered, there should be a watchdog with a kick interval of 10 seconds. Needless to say that without detailed documentation of the hardware registers of the chip even such a simple task as disabling the watchdog can be challenging.

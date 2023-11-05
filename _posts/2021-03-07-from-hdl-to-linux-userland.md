@@ -55,16 +55,16 @@ Once we are confident that the code can be synthesized we can move to verificati
 
 All tests have a proper check/verification procedure to ensure that they are correct. The following figure shows the summary of VUnit after all tests passed.
 
-![_config.yml]({{ site.baseurl }}/images/hdl_to_linux_userland/vunit_tests_passed.png)
+![](/assets/posts/hdl_to_linux_userland/vunit_tests_passed.png)
 
 Note that I used VUnits [Verification Component Library](https://vunit.github.io/verification_components/user_guide.html) in order to interface the custom IP using an AXI-Lite interface.   
 Finally, we pack the IP in order to be able to insert it into the Xilinx BD without issues. This is the final product of the FPGA development:
 
-![_config.yml]({{ site.baseurl }}/images/hdl_to_linux_userland/pwm_ip_core.png)
+![](/assets/posts/hdl_to_linux_userland/pwm_ip_core.png)
 
 Within the main design instantiate, connect, and Memory-Map the IP into the address space of the processor. This is done using the Vivado Address Editor and might look as follows.
 
-![_config.yml]({{ site.baseurl }}/images/hdl_to_linux_userland/pwm_ip_mm.png)
+![](/assets/posts/hdl_to_linux_userland/pwm_ip_mm.png)
 
 ## The Operating System (Linux)
 
@@ -138,6 +138,6 @@ echo 1 > pwm0/enable
 
 The figure below describes (roughly) how all the layers of abstraction are connected.
 
-![_config.yml]({{ site.baseurl }}/images/hdl_to_linux_userland/overview.png)
+![](/assets/posts/hdl_to_linux_userland/overview.png)
 
 We started off designing, verifying, and implementing an IP in the FPGA, provided the Linux Kernel with the details about the device using a device-tree node, and finally wrote and tested a PWM-Driver. Since this blog post was focused on interfaces and the general design approach, I did not provide the source code itself. However, I hope it was still interesting and you gained some insight into how I design and integrate custom IPs.

@@ -14,7 +14,7 @@ tags:
 
 In the [previous post](https://embed-me.github.io/qemu-how-to-emulate-your-zynq-7000/) about the Zynq-7000 and QEMU, we took a closer look at emulating a whole Linux using QEMU’s System Emulation feature. This post, will be a little add-on and show how applications compiled for a different architecture can be run on the host through what’s called User Mode Emulation. QEMU has a broad spectrum of features including System Call Translation, POSIX signal handling, and Multi-Threading in order to emulate as much of the User Space as possible. This feature set is quite impressive and its usage is super simple. However, if you are interested in the internal workings of QEMU including a description of how the remarkable dynamic translation works, have a look at [MIT’s documentation of QEMU Internals](https://stuff.mit.edu/afs/sipb/project/phone-project/share/doc/qemu/qemu-tech.html).
 
-![_config.yml]({{ site.baseurl }}/images/zynq_quemu_part2/image.png "QEMU")
+![](/assets/posts/zynq_quemu_part2/image.png "QEMU")
 
 ## The Prerequisites
 

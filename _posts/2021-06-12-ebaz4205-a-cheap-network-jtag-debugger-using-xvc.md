@@ -13,17 +13,17 @@ I always wanted to have a cheap debugger tightly integrated into the Vivado Tool
 
 In order to clarify, the following figure shows how I expect the setup to look like. The target is connected to the debugger through JTAG, which in turn is connected to the Host computer with Ethernet running [XVC](https://www.xilinx.com/products/intellectual-property/xvc.html) (Xilinx Virtual Cable) protocol on top of TCP/IP.
 
-![_config.yml]({{ site.baseurl }}/images/ebaz4205_network_jtag/xvc-server.png)
+![](/assets/posts/ebaz4205_network_jtag/xvc-server.png)
 
 The following image shows the above scenario with actual hardware. The wires connecting both boards are the JTAG ports.
 
-![_config.yml]({{ site.baseurl }}/images/ebaz4205_network_jtag/ebaz4205-jtag_setup.png)
+![](/assets/posts/ebaz4205_network_jtag/ebaz4205-jtag_setup.png)
 
 ## The FPGA Design
 
 First, let’s create a Vivado Design which includes a so-called [Xilinx Debug Bridge](https://www.xilinx.com/products/intellectual-property/debug-bridge.html). It supports multiple modes which can be used to assist you in debugging your design, however, it also allows you to interface with an FPGA through JTAG. Luckily exactly what we want and trivial to set up. The following figure shows the resulting Block Design containing PS (Processing System), Interconnect, System Reset, and Debug Bridge. If you are new to the EBAZ4205 hardware platform, make sure to check out [this post](https://embed-me.github.io/ebaz4205-recycle-cheap-crypto-miner-part-2/) before you continue.
 
-![_config.yml]({{ site.baseurl }}/images/ebaz4205_network_jtag/ebaz4205_jtag_bd.png)
+![](/assets/posts/ebaz4205_network_jtag/ebaz4205_jtag_bd.png)
 
 All that’s left is to define the pinout in a [constraints file](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug945-vivado-using-constraints-tutorial.pdf). The following pins are all located on the “DATA1” connector on the PCB and therefore easily accessible with wires.
 
@@ -135,9 +135,9 @@ open_hw_target -xvc_url <ebaz4205_jtag_ip>:2542
 
 We can already see and fully control our target. The following figures show the target before- and after programming the FPGA.
 
-![_config.yml]({{ site.baseurl }}/images/ebaz4205_network_jtag/xvc-not-programmed.png)
+![](/assets/posts/ebaz4205_network_jtag/xvc-not-programmed.png)
 
-![_config.yml]({{ site.baseurl }}/images/ebaz4205_network_jtag/xvc-programmed.png)
+![](/assets/posts/ebaz4205_network_jtag/xvc-programmed.png)
 
 ## What’s next
 

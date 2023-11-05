@@ -15,13 +15,13 @@ tags:
 
 ## Intro
 
-![_config.yml]({{ site.baseurl }}/images/google_2020_ctf_web/google_ctf_banner.png)
+![](/assets/posts/google_2020_ctf_web/google_ctf_banner.png)
 
 In my previous [post ](https://embed-me.github.io/google-2020-ctf-hardware-challenge/)about the google 2020 CTF Challenge, everything was focused on a hardware description language. Since I enjoyed it so much, I decided to give another challenge a try. About half a year ago I read the classic book [Web Application Hacker’s Handbook](https://www.goodreads.com/book/show/1914619.The_Web_Application_Hacker_s_Handbook?from_search=true&from_srp=true&qid=tmgHIXc3R3&rank=1) from the makers of [Burpsuite ](https://portswigger.net/burp)– Dafydd Stuttard and Marcus Pinto. Therefore I decided to go for the beginners web challenge this time.
 
 ## The Challenge
 
-![_config.yml]({{ site.baseurl }}/images/google_2020_ctf_web/google_ctf_overview-1.png)
+![](/assets/posts/google_2020_ctf_web/google_ctf_overview-1.png)
 
 First of all, let’s fool around a little bit and find out what the page <https://pasteurize.web.ctfcompetition.com/> is all about. In summary what we can do is:
 
@@ -31,7 +31,7 @@ First of all, let’s fool around a little bit and find out what the page <https
 
 Below a simple example of the text “foo” being pasted.
 
-![_config.yml]({{ site.baseurl }}/images/google_2020_ctf_web/share_with_TJMike.png)
+![](/assets/posts/google_2020_ctf_web/share_with_TJMike.png)
 
 This already smells like XSS, but before jumping to wild conclusions let’s have a look at the source code of the site. One thing that immediately got my attention is the following comment:
 
@@ -292,15 +292,15 @@ The following table shows the type and object before- and after sanitization.
 
 In order to proof our theory, we need to create a new paste with our payload.
 
-![_config.yml]({{ site.baseurl }}/images/google_2020_ctf_web/exploit_poc.png)
+![](/assets/posts/google_2020_ctf_web/exploit_poc.png)
 
 Second, we need to make sure the transmitted value is of type List, either by providing multiple values with the same name or by using this neat trick that I spotted by [gynvael](https://gynvael.coldwind.pl/).
 
-![_config.yml]({{ site.baseurl }}/images/google_2020_ctf_web/source_code_post_content_modified.png)
+![](/assets/posts/google_2020_ctf_web/source_code_post_content_modified.png)
 
 When we provide the above payload, the alert method will be executed and will show up in the browser. From there on we can move to exploitation
 
-![_config.yml]({{ site.baseurl }}/images/google_2020_ctf_web/exploit_poc_executed.png)
+![](/assets/posts/google_2020_ctf_web/exploit_poc_executed.png)
 
 ## Exploitation
 

@@ -13,7 +13,7 @@ Yes, yes, I know, I have done a couple of [posts](https://embed-me.github.io/eba
 
 First of all, a short remark. Compared to Yocto, [Buildroot ](https://buildroot.org/)is quite easy to use and the learning curve is not that steep. At least in my experience using a predefined defconfig or even modify an existing one to fit your needs can be done in no-time. The main difference is that Buildroot offers a nice configuration tool that is very similar to the one used by the Linux Kernel and Busybox. Therefore a lot of developers should already be familiar with the workflow. Furthermore, the [documentation](https://buildroot.org/docs.html) is quite good and offers a perfect starting point. However, one of the main drawbacks (at least from my experience) is the very limited dependency system. In short, I find that most of the configuration changes made need a rebuild of the system and this takes quite some time. Nevertheless, Buildroot is a great tool that offers a cross-compilation toolchain, a root filesystem, Linux kernel image, and bootloader for your custom system.
 
-![](https://buildroot.uclibc.org/images/logo.png)
+![](/assets/posts/logo.png)
 
 ## The Build
 
@@ -61,7 +61,7 @@ All the build artifacts are placed in the subdir *output/images/*. Although a po
 
 To verify that the build was successful and everything is working, let’s try it on the EBAZ4205. A couple of seconds later, we find ourselves in the Buildroot Linux login prompt. Yay!
 
-![_config.yml]({{ site.baseurl }}/images/ebaz4205_part5/prompt.png)
+![](/assets/posts/ebaz4205_part5/prompt.png)
 
 ## What’s next
 
