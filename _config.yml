@@ -23,6 +23,8 @@ plugins:
   - jekyll-paginate
   - jekyll-remote-theme
 
+google_analytics: G-1YKQLSFGKK
+  
 defaults:
   -
     scope:
